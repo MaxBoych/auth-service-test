@@ -1,0 +1,8 @@
+{
+  "Server": {
+    "Host": "localhost:8080"
+  },
+  "DB": {
+    "Type": "in-memory"
+  }
+}

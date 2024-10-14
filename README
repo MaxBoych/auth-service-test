@@ -1,0 +1,6 @@
+Для удобства тестирования в базе по дефолту уже лежит админ:
+- Username: "ivan123"
+- Password: "123456"
+
+Для Basic Access Auth хэдер будет выглядеть так:
+- Authorization: Basic aXZhbjEyMzoxMjM0NTY=

@@ -1,0 +1,211 @@
+definitions:
+  userHTTPHandlers.ChangeOneRequest:
+    properties:
+      email:
+        type: string
+      firstname:
+        type: string
+      lastname:
+        type: string
+      phone_number:
+        type: string
+      role:
+        type: string
+      username:
+        type: string
+    required:
+    - username
+    type: object
+  userHTTPHandlers.DeleteOneRequest:
+    properties:
+      username:
+        type: string
+    required:
+    - username
+    type: object
+  userHTTPHandlers.GetOneRequest:
+    properties:
+      username:
+        type: string
+    required:
+    - username
+    type: object
+  userHTTPHandlers.GetOneResponse:
+    properties:
+      email:
+        type: string
+      firstname:
+        type: string
+      lastname:
+        type: string
+      phone_number:
+        type: string
+      role:
+        type: string
+      username:
+        type: string
+    type: object
+  userHTTPHandlers.RegisterOneRequest:
+    properties:
+      email:
+        type: string
+      firstname:
+        type: string
+      lastname:
+        type: string
+      password:
+        type: string
+      phone_number:
+        type: string
+      role:
+        type: string
+      username:
+        type: string
+    required:
+    - firstname
+    - lastname
+    - password
+    - role
+    - username
+    type: object
+info:
+  contact: {}
+paths:
+  /change_one:
+    post:
+      consumes:
+      - application/json
+      description: Update details for a specific user by username
+      parameters:
+      - description: User update information
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/userHTTPHandlers.ChangeOneRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+        "400":
+          description: Invalid request
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BasicAuth: []
+      summary: Update user details
+      tags:
+      - users
+  /delete_one:
+    post:
+      consumes:
+      - application/json
+      description: Delete a user by username
+      parameters:
+      - description: User delete information
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/userHTTPHandlers.DeleteOneRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+        "400":
+          description: Invalid request
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BasicAuth: []
+      summary: Delete user
+      tags:
+      - users
+  /get_one:
+    post:
+      consumes:
+      - application/json
+      description: Get user details by providing a username
+      parameters:
+      - description: User information
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/userHTTPHandlers.GetOneRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/userHTTPHandlers.GetOneResponse'
+        "400":
+          description: Invalid request
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BasicAuth: []
+      summary: Get user by username
+      tags:
+      - users
+  /get_one_own:
+    get:
+      consumes:
+      - application/json
+      description: Get details of the currently authenticated user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/userHTTPHandlers.GetOneResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+      security:
+      - BasicAuth: []
+      summary: Get own user information
+      tags:
+      - users
+  /register_one:
+    post:
+      consumes:
+      - application/json
+      description: Register a new user with all required details
+      parameters:
+      - description: New user information
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/userHTTPHandlers.RegisterOneRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+        "400":
+          description: Invalid request
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BasicAuth: []
+      summary: Register new user
+      tags:
+      - users
+swagger: "2.0"
